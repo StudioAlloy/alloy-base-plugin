@@ -168,18 +168,21 @@ class Alloy_Base_Plugin
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         $this->loader->add_filter('login_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+        $this->loader->add_filter('wp_footer', $plugin_admin, 'alloy_custom_admin_bar');
+        $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
+        $this->loader->add_filter('wp_before_admin_bar_render', $plugin_admin, 'clean_up_admin_header');
+        $this->loader->add_filter('admin_bar_menu', $plugin_admin, 'clean_up_admin_bar');
+        $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'alloy_hide_update_msg_non_admins');
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
         $this->loader->add_action('wp_dashboard_setup', $plugin_admin, 'clean_up_dashboard');
         $this->loader->add_filter('upload_size_limit', $plugin_admin, 'set_quota_upload_size');
-        $this->loader->add_filter('wp_before_admin_bar_render', $plugin_admin, 'clean_up_admin_header');
-        $this->loader->add_filter('admin_bar_menu', $plugin_admin, 'clean_up_admin_bar');
         $this->loader->add_filter('admin_footer_text', $plugin_admin, 'change_admin_footer');
-        $this->loader->add_filter('wp_footer', $plugin_admin, 'alloy_custom_admin_bar');
+
         show_admin_bar(false); // Diable admin bar fro all users
 
         //disable all comments
-        if (get_option('alloy_base_plugin_disable_comments')) {
+        if (!get_option('alloy_base_plugin_enable_comments')) {
             $this->loader->add_action('admin_init', $plugin_admin, 'disable_comments_post_types_support');
             $this->loader->add_filter('comments_open', $plugin_admin, 'disable_comments_status', 20, 2);
             $this->loader->add_filter('pings_open', $plugin_admin, 'disable_comments_status', 20, 2);
@@ -188,6 +191,9 @@ class Alloy_Base_Plugin
             $this->loader->add_action('admin_init', $plugin_admin, 'disable_comments_admin_menu_redirect');
             $this->loader->add_action('admin_init', $plugin_admin, 'disable_comments_dashboard');
             $this->loader->add_action('init', $plugin_admin, 'disable_comments_admin_bar');
+        }
+        if (get_option('alloy_base_plugin_data_studio_id')) {
+            $this->loader->add_action('wp_dashboard_setup', $plugin_admin, 'example_add_dashboard_widgets');
         }
     }
 

@@ -135,6 +135,7 @@ class Alloy_Base_Plugin_Admin
                 </style>";
         }
     }
+    // END Remove the default wordpress notifications for none admins -------------------------------------//
 
     //------------------------------------------------------//
     // Add admin settings page fields  
@@ -171,14 +172,14 @@ class Alloy_Base_Plugin_Admin
         register_setting($this->plugin_name, $this->option_name . '_upload_size_limit', 'interval');
 
         add_settings_field(
-            $this->option_name . '_disable_comments',
-            __('Disable comments', $this->plugin_name),
-            array($this, $this->option_name . '_disable_comments_cb'),
+            $this->option_name . '_enable_comments',
+            __('Enable comments', $this->plugin_name),
+            array($this, $this->option_name . '_enable_comments_cb'),
             $this->plugin_name,
             $this->option_name . '_general',
-            array('label_for' => $this->option_name . '_disable_comments')
+            array('label_for' => $this->option_name . '_enable_comments')
         );
-        register_setting($this->plugin_name, $this->option_name . '_disable_comments');
+        register_setting($this->plugin_name, $this->option_name . '_enable_comments');
 
         // Add Data Studio section and fields
         add_settings_section(
@@ -195,6 +196,8 @@ class Alloy_Base_Plugin_Admin
             $this->option_name . '_data_studio',
             array('label_for' => $this->option_name . '_data_studio_id')
         );
+        register_setting($this->plugin_name, $this->option_name . '_data_studio_id', 'string');
+
         add_settings_field(
             $this->option_name . '_data_studio_page_one',
             __('Page one', $this->plugin_name),
@@ -266,21 +269,21 @@ class Alloy_Base_Plugin_Admin
     public function alloy_base_plugin_upload_size_limit_cb()
     {
         $option = get_option($this->option_name . '_upload_size_limit');
-        echo '<input type="number" name="' . $this->option_name . '_upload_size_limit' . '" id="' . $this->option_name . '_upload_size_limit' . '" value="' . $option . '"> KB';
-        echo '<p>Set to 0 to turn off. Defautl is 300kb</p>';
+        echo '<input type="number" name="' . $this->option_name . '_upload_size_limit' . '" id="' . $this->option_name . '_upload_size_limit' . '" value="' . $option . '"> kb';
+        echo '<p>Set to 0 to turn off. Default is 1mb</p>';
     }
     public function set_quota_upload_size()
     {
         $value = esc_attr(get_option($this->option_name . '_upload_size_limit'));
-        if ($value <= 0 || $value == '' || $value == NULL) $value = 300;
+        if ($value <= 0 || $value == '' || $value == NULL) $value = 999;
         return $value * 1024;
     }
 
-    public function alloy_base_plugin_disable_comments_cb()
+    public function alloy_base_plugin_enable_comments_cb()
     {
-        $option = get_option($this->option_name . '_disable_comments');
-        // echo '<input type="checkbox" name="' . $this->option_name . '_disable_comments' . '" id="' . $this->option_name . '_disable_comments' . '" value="' . $option . '"' . checked($option, '1') . '>';
-        echo '<input type="checkbox" name="' . $this->option_name . '_disable_comments' . '" id="' . $this->option_name . '_disable_comments' . '" value="1"' . checked(1, $option, false) . '>';
+        $option = get_option($this->option_name . '_enable_comments');
+        // echo '<input type="checkbox" name="' . $this->option_name . '_enable_comments' . '" id="' . $this->option_name . '_enable_comments' . '" value="' . $option . '"' . checked($option, '1') . '>';
+        echo '<input type="checkbox" name="' . $this->option_name . '_enable_comments' . '" id="' . $this->option_name . '_enable_comments' . '" value="1"' . checked(1, $option, false) . '>';
     }
     public function alloy_base_plugin_data_studio_id_cb()
     {
@@ -418,10 +421,52 @@ class Alloy_Base_Plugin_Admin
         if (get_option('sae_clean_admin_header_comments') || get_option('sae_hide_all_comment_stuff')) $wp_admin_bar->remove_menu('comments');
         if (get_option('sae_clean_admin_header_new_content')) $wp_admin_bar->remove_menu('new-content');
     }
+
+    // include GA tracking code before the closing head tag
+
+    // END Clean up Admin bar -------------------------------------//
+    public function change_admin_footer()
+    {
+        echo 'Website by <a href="//studioalloy.nl" target="_blank">Studio Alloy</a>';
+    }
+    public function example_add_dashboard_widgets()
+    {
+        wp_add_dashboard_widget(
+            $this->option_name . '_data_studio_page_one',         // Widget slug.
+            'Analytics by Studio Alloy',         // Title.
+            $this->option_name . '_analytics_widget_page_one_function' // Display function.
+        );
+
+        wp_add_dashboard_widget(
+            $this->option_name . '_data_studio_page_two',         // Widget slug.
+            'Analytics by Studio Alloy',         // Title.
+            $this->option_name . '_analytics_widget_page_one_function', // Display function.
+            // 'dashboard',
+            // 'side',
+            // 'high'
+        );
+        add_meta_box(
+            $this->option_name . '_data_studio_page_three',         // Widget slug.
+            'Analytics by Studio Alloy',         // Title.
+            $this->option_name . '_analytics_widget_page_one_function', // Display function.
+            'dashboard',
+            'side',
+            'high'
+        );
+        add_meta_box(
+            $this->option_name . '_data_studio_page_four',         // Widget slug.
+            'Analytics by Studio Alloy',         // Title.
+            $this->option_name . '_analytics_widget_page_one_function', // Display function.
+            'dashboard',
+            'side',
+            'high'
+        );
+    }
+
     /* Custom admin bar on fontend ----------------------------------------- */
     // Include the Google Analytics Tracking Code (ga.js)
     // @ https://developers.google.com/analytics/devguides/collection/gajs/
-    function alloy_custom_admin_bar()
+    public function alloy_custom_admin_bar()
     { ?>
         <?php if (current_user_can('edit_posts')) : ?>
             <div class="alloy-custom-admin-bar">
@@ -433,9 +478,8 @@ class Alloy_Base_Plugin_Admin
                     position: fixed;
                     bottom: 0;
                     left: 10%;
-                    background-color: #344;
+                    background-color: #0c162d;
                     z-index: 2147483647;
-                    /*box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);*/
                 }
 
                 .alloy-custom-admin-bar a {
@@ -466,14 +510,25 @@ class Alloy_Base_Plugin_Admin
 
 <?php }
 
-    // include GA tracking code before the closing head tag
-
-    // END Clean up Admin bar -------------------------------------//
-    public function change_admin_footer()
-    {
-        echo 'Website by <a href="//studioalloy.nl" target="_blank">Studio Alloy</a>';
-    }
-
-
     // 🛑 END of file add code between here
+}
+function alloy_base_plugin_analytics_widget_page_one_function($post, $callback_args)
+{
+    $dataID = get_option("alloy_base_plugin_data_studio_id");
+    $dataDefaultPages = ["8viH", "mIga", "sPga", "pTga",];
+    if (strpos($callback_args['id'], 'one') !== false) {
+        $dataPage = $dataDefaultPages[0];
+    } elseif (strpos($callback_args['id'], 'two') !== false) {
+        $dataPage = $dataDefaultPages[1];
+    } elseif (strpos($callback_args['id'], 'three') !== false) {
+        $dataPage = $dataDefaultPages[2];
+    } elseif (strpos($callback_args['id'], 'four') !== false) {
+        $dataPage = $dataDefaultPages[3];
+    }
+    // $dataPage = '8viH';
+    $dataPage = get_option($callback_args['id']) ? get_option($callback_args['id']) : $dataPage;
+
+    echo '<div class="alloy-analytics-container">
+        <iframe src="https://datastudio.google.com/embed/reporting/' . $dataID . '/page/' . $dataPage . '" frameborder="0" style="border:0" allowfullscreen encrypted-media; gyroscope;></iframe>
+    </div>';
 }
