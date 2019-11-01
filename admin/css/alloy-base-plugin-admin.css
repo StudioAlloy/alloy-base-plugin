@@ -16,7 +16,7 @@
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu,
 .no-js li.wp-has-current-submenu:hover .wp-submenu {
-  background: #465a5a;
+  background: #2e3e61;
 }
 #adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head,
 #adminmenu .wp-menu-arrow,
@@ -25,7 +25,7 @@
 #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
 .folded #adminmenu li.current.menu-top,
 .folded #adminmenu li.wp-has-current-submenu {
-  background: #e64;
+  background: #f53;
 }
 body {
   color: #0c162d;
@@ -38,12 +38,12 @@ a {
 }
 a:active,
 a:hover {
-  color: #e64;
+  color: #f53;
 }
 #adminmenu li.menu-top:hover,
 #adminmenu li.opensub > a.menu-top,
 #adminmenu li > a.menu-top:focus {
-  color: #e64;
+  color: #f53;
   background: rgba(0, 0, 0, 0.2);
 }
 .plugin-update-tr.active td,
@@ -54,7 +54,7 @@ a:hover {
 #adminmenu .wp-submenu a:hover,
 #adminmenu a:hover,
 #adminmenu li.menu-top > a:focus {
-  color: #e64;
+  color: #f53;
 }
 .wrap .add-new-h2:hover,
 .wrap .page-title-action:hover {
@@ -63,36 +63,36 @@ a:hover {
 #adminmenu li a:focus div.wp-menu-image:before,
 #adminmenu li.opensub div.wp-menu-image:before,
 #adminmenu li:hover div.wp-menu-image:before {
-  color: #e64;
+  color: #f53;
 }
 #collapse-menu:hover,
 #collapse-menu:hover #collapse-button div:after {
-  color: #e64;
+  color: #f53;
 }
 #adminmenu li a.wp-has-current-submenu .update-plugins,
 #adminmenu li.current a .awaiting-mod {
   background: #fff;
-  color: #e64;
+  color: #f53;
 }
 .plugins .active.update th.check-column,
 .plugins .active.update + .plugin-update-tr .plugin-update {
-  border-color: #e64;
+  border-color: #f53;
 }
 .plugin-card .install-now:before,
 .plugin-card .update-now:before,
 .plugin-update-tr .update-message:before {
-  color: #e64;
+  color: #f53;
 }
 .notice-error,
 div.error {
-  border-color: #e64;
+  border-color: #f53;
 }
 #wpadminbar .ab-top-menu > li.hover > .ab-item,
 #wpadminbar.nojq .quicklinks .ab-top-menu > li > .ab-item:focus,
 #wpadminbar:not(.mobile) .ab-top-menu > li:hover > .ab-item,
 #wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus {
   background: rgba(0, 0, 0, 0.2);
-  color: #e64;
+  color: #f53;
 }
 .settings_alert {
   background: #f00 !important;
@@ -113,7 +113,7 @@ div.error {
   height: 8px;
 }
 .noticespan.red {
-  color: #e64;
+  color: #f53;
 }
 .noticespan.green {
   color: #599;
@@ -157,14 +157,14 @@ div.error {
 .wp-core-ui .button-primary.hover,
 .wp-core-ui .button-primary:focus,
 .wp-core-ui .button-primary:hover {
-  background: #e64;
+  background: #f53;
   border-color: #c30;
   color: #fff;
   text-shadow: 0 -1px 1px #c30, 1px 0 1px #c30, 0 1px 1px #c30, -1px 0 1px #c30;
 }
 .posp_container.posp_container.posp_container input,
 #publish {
-  background: #e64;
+  background: #f53;
   border-color: #c30 #c30 #c30;
   -webkit-box-shadow: 0 1px 0 #c30;
   box-shadow: 0 1px 0 #c30;
