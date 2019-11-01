@@ -73,7 +73,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-alloy-base-plugin.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    version 2
  */
 function run_alloy_base_plugin()
 {
