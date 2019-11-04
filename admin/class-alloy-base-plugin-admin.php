@@ -465,14 +465,10 @@ class Alloy_Base_Plugin_Admin
             'Analytics by Studio Alloy',         // Title.
             $this->option_name . '_analytics_widget_page_one_function' // Display function.
         );
-
         wp_add_dashboard_widget(
-            $this->option_name . '_data_studio_page_two',         // Widget slug.
-            'Analytics by Studio Alloy',         // Title.
-            $this->option_name . '_analytics_widget_page_one_function', // Display function.
-            // 'dashboard',
-            // 'side',
-            // 'high'
+            $this->option_name . '_data_studio_page_two',
+            'Analytics by Studio Alloy',
+            $this->option_name . '_analytics_widget_page_one_function'
         );
         add_meta_box(
             $this->option_name . '_data_studio_page_three',         // Widget slug.
