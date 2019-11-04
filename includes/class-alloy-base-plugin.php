@@ -162,7 +162,6 @@ class Alloy_Base_Plugin
      */
     private function define_admin_hooks()
     {
-
         $plugin_admin = new Alloy_Base_Plugin_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
@@ -181,7 +180,6 @@ class Alloy_Base_Plugin
         $this->loader->add_filter('admin_footer_text', $plugin_admin, 'change_admin_footer');
 
         show_admin_bar(false); // Diable admin bar fro all users
-
         //disable all comments
         if (!get_option('alloy_base_plugin_enable_comments')) {
             $this->loader->add_action('admin_init', $plugin_admin, 'disable_comments_post_types_support');
@@ -196,8 +194,9 @@ class Alloy_Base_Plugin
         if (get_option('alloy_base_plugin_data_studio_id')) {
             $this->loader->add_action('wp_dashboard_setup', $plugin_admin, 'example_add_dashboard_widgets');
         }
+        $this->loader->add_filter('admin_footer_text', $plugin_admin, 'alloy_toggle_admin_role');
+        $this->loader->add_action('wp_ajax_my_action', $plugin_admin, 'alloy_switch_role_callback');
     }
-
     /**
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
