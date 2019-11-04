@@ -174,6 +174,7 @@ class Alloy_Base_Plugin
         $this->loader->add_filter('admin_bar_menu', $plugin_admin, 'clean_up_admin_bar');
         $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'alloy_hide_update_msg_non_admins');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'alloy_show_acf_field_slug');
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
         $this->loader->add_action('wp_dashboard_setup', $plugin_admin, 'clean_up_dashboard');
         $this->loader->add_filter('upload_size_limit', $plugin_admin, 'set_quota_upload_size');

@@ -14,11 +14,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Alloy Base Plugin
- * Plugin URI:        studio alloy.nl
+ * Plugin URI:        https://github.com/StudioAlloy/alloy-base-plugin
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            Studio Alloy
- * Author URI:        studio alloy.nl
+ * Author URI:        studioalloy.nl
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       alloy-base-plugin
@@ -35,7 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('ALLOY_BASE_PLUGIN_VERSION', '1.0.0');
+define('ALLOY_BASE_PLUGIN_VERSION', '2');
 
 /**
  * The code that runs during plugin activation.

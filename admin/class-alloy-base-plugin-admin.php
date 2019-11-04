@@ -135,6 +135,28 @@ class Alloy_Base_Plugin_Admin
                 </style>";
         }
     }
+    public function alloy_show_acf_field_slug()
+    {
+        if (current_user_can('manage_options')) { // non-admin users
+            echo "<style>
+                #poststuff .acf-postbox .acf-fields .acf-field[data-name]:before {
+                content: attr(data-name);
+                background-color: #eee;
+                padding: 0px 3px;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+                margin: 5px 0;
+                display: inline-block;
+                float: right;
+                transform: translateY(-10px);
+                font-size: 10px;
+                /* position: relative;
+                z-index: 100;
+                cursor: pointer; */
+                }
+                </style>";
+        }
+    }
     // END Remove the default wordpress notifications for none admins -------------------------------------//
 
     //------------------------------------------------------//
@@ -395,11 +417,11 @@ class Alloy_Base_Plugin_Admin
             'href'  => get_site_url(),
         ));
         if (strpos(wp_get_current_user()->user_email, '@studioalloy.nl') !== false) {
-$wp_admin_bar->add_menu(array(
-    'id' => 'upgrade-admin',
-    'title'  =>  'Toggle admin',
-    'href'  => get_site_url(),
-));
+            $wp_admin_bar->add_menu(array(
+                'id' => 'upgrade-admin',
+                'title'  =>  'Toggle admin',
+                'href'  => get_site_url(),
+            ));
         }
         if (is_admin()) {
             $wp_admin_bar->add_menu(array(
