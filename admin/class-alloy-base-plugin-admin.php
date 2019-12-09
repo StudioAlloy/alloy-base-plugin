@@ -172,8 +172,7 @@ class Alloy_Base_Plugin_Admin
             'upload_files', // $capability
             $this->plugin_name,  // $menu_slug
             array($this, 'display_settings_page'), // $function
-            '', // $icon_url
-            '3.0' // $postion number on menu from top
+            3
         );
 
         // Add a General section and fields
