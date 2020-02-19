@@ -16,7 +16,7 @@
  * Plugin Name:       Alloy Base Plugin
  * Plugin URI:        https://github.com/StudioAlloy/alloy-base-plugin
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Version:           2.2
  * Author:            Studio Alloy
  * Author URI:        studioalloy.nl
  * License:           GPL-2.0+
