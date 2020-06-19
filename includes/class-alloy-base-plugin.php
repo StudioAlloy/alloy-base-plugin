@@ -168,10 +168,10 @@ class Alloy_Base_Plugin
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         $this->loader->add_filter('login_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_filter('wp_footer', $plugin_admin, 'alloy_custom_admin_bar');
-        $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
+        // $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
         $this->loader->add_filter('wp_before_admin_bar_render', $plugin_admin, 'clean_up_admin_header');
         $this->loader->add_filter('admin_bar_menu', $plugin_admin, 'clean_up_admin_bar');
-        $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
+        // $this->loader->add_filter('wp_footer', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'alloy_hide_update_msg_non_admins');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'alloy_show_acf_field_slug');
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
@@ -209,7 +209,7 @@ class Alloy_Base_Plugin
 
         $plugin_public = new Alloy_Base_Plugin_Public($this->get_plugin_name(), $this->get_version());
 
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+        // $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
     }
 
